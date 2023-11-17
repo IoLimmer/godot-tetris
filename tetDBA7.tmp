@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsocbapmpir25"]
+
+[ext_resource type="Script" path="res://Tetronimo.gd" id="1_udwof"]
+
+[node name="Tetronimo" type="Node2D"]
+script = ExtResource("1_udwof")

@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgesb5jag2tsu"]
+
+[ext_resource type="Script" path="res://block.gd" id="1_2h3t6"]
+[ext_resource type="Texture2D" uid="uid://11xgxgpynphd" path="res://img/tiles_tetris_8x8.png" id="1_76584"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaa0i"]
+atlas = ExtResource("1_76584")
+region = Rect2(16, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtvpa"]
+atlas = ExtResource("1_76584")
+region = Rect2(40, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmt2w"]
+atlas = ExtResource("1_76584")
+region = Rect2(24, 72, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cfjbi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaa0i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtvpa")
+}],
+"loop": true,
+"name": &"leftmost",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmt2w")
+}],
+"loop": true,
+"name": &"rightmost",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wg1oh"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6vwd"]
+size = Vector2(5, 7)
+
+[node name="Tetronimo block" type="Area2D"]
+script = ExtResource("1_2h3t6")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_cfjbi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_wg1oh")
+
+[node name="Detect below" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect below"]
+position = Vector2(4, 8)
+shape = SubResource("RectangleShape2D_o6vwd")
+
+[connection signal="body_entered" from="Detect below" to="." method="_on_detect_below_body_entered"]
